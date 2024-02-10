@@ -117,3 +117,30 @@ header .icons span:last-child {
 .days li.active::before {
     background: #a5a69a;
 }
+
+.reservations-container {
+    position: fixed;
+    right: 100px; 
+    width: 200px; 
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    display: none;
+}
+
+.reservations-container h3 {
+    margin-top: 0;
+}
+
+.reservations-container ul {
+    padding: 0;
+    margin-top: 5px;
+}
+
+.reservations-container li {
+    list-style: none;
+    margin-bottom: 5px;
+}
