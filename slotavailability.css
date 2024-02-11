@@ -23,7 +23,6 @@ body {
     background: #f1ebe5;
     border-radius: 10px;
     border: 1px solid #432f32;
-    
 }
 
 header .current-date {
@@ -119,28 +118,41 @@ header .icons span:last-child {
 }
 
 .reservations-container {
+    display: none;
     position: fixed;
     right: 100px; 
-    width: 200px; 
+    width: 250px; 
     background-color: #f0f0f0;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     text-align: center;
-    display: none;
+    overflow-y: auto; 
 }
 
 .reservations-container h3 {
     margin-top: 0;
+    margin-bottom: 10px; 
+}
+
+.reservations-container h4 {
+    margin-top: 15px; 
+    margin-bottom: 5px; 
 }
 
 .reservations-container ul {
     padding: 0;
     margin-top: 5px;
+    list-style: none; 
 }
 
 .reservations-container li {
-    list-style: none;
     margin-bottom: 5px;
+}
+
+#labSelect {
+    width: 100px; 
+    position: fixed;
+    margin-left: 13%;
 }
