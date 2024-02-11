@@ -33,76 +33,64 @@ const renderCalendar = () => {
     currentDate.innerText = `${months[currMonth]} ${currYear}`;
     daysTag.innerHTML = liTag;
     
-    const getReservationsForDate = (date) => {
-        const reservations = sampleData.find(data => {
+    const getReservationsForDate = (date, lab) => {
+        console.log("Selected Lab:", lab);
+        console.log("Date:", date);
+    
+        const reservations = sampleData.filter(data => {
             const sampleDate = new Date(data.date);
-            return sampleDate.getFullYear() === date.getFullYear() &&
-                   sampleDate.getMonth() === date.getMonth() &&
-                   sampleDate.getDate() === date.getDate();
+            return (
+                data.lab === lab &&
+                sampleDate.getFullYear() === date.getFullYear() &&
+                sampleDate.getMonth() === date.getMonth() &&
+                sampleDate.getDate() === date.getDate()
+            );
         });
-        return reservations ? reservations.reservations : [];
-    }
+    
+        console.log("Filtered Reservations:", reservations);
+    
+        return reservations.length > 0 ? reservations[0].reservations : [];
+    };
     
     
-    const handleDateClick = (element, date) => {
-        const reservations = getReservationsForDate(date);
+    
+    
+    
+    const handleDateClick = (element, date, selectedLab) => {
         const reservationsContainer = document.querySelector(".reservations-container");
-    
         reservationsContainer.innerHTML = "";
     
-        if (date.getDay() === 0) { // 0 MEANS SUNDAY
-            const closedMessage = document.createElement("p");
-            closedMessage.textContent = "The labs are closed on Sundays.";
-            reservationsContainer.appendChild(closedMessage);
-            return;
-        }
-    
         const header = document.createElement("h3");
-        header.textContent = `Available time slots for ${date.toDateString()}:`;
+        header.textContent = `Available time slots for ${selectedLab} on ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}:`;
         reservationsContainer.appendChild(header);
     
+        
+        const labReservations = getReservationsForDate(date, selectedLab);
+    
         const ul = document.createElement("ul");
-        const startHour = 8; // 8AM
-        const endHour = 20; // 8PM
-        const reservedTimes = new Set(reservations.map(time => time.split(" ")[0]));
-        for (let hour = startHour; hour < endHour; hour++) {
+        for (let hour = 8; hour < 20; hour++) { // From 8AM to 8PM
             const time = `${hour.toString().padStart(2, '0')}:00`; // MILITARY TIME ("08:00")
-            if (!reservedTimes.has(time)) {
-                const li = document.createElement("li");
-                li.textContent = time;
-                ul.appendChild(li);
-            }
+            const reservation = labReservations.find(reservation => reservation.startsWith(time));
+            const li = document.createElement("li");
+            li.textContent = `${time} - ${reservation ? 'Reserved' : 'Available'}`;
+            ul.appendChild(li);
         }
     
         reservationsContainer.appendChild(ul);
     
-        // Create buttons for Lab A, Lab B, Lab C, and Lab D
-        const labButtons = document.createElement("div");
-        labButtons.classList.add("lab-buttons");
-        ["Lab A", "Lab B", "Lab C", "Lab D"].forEach(lab => {
-            const button = document.createElement("button");
-            button.textContent = lab;
-            button.addEventListener("click", () => {
-                // Handle button click, you can customize this as needed
-                alert(`You clicked ${lab} on ${date.toDateString()}`);
-            });
-            labButtons.appendChild(button);
-        });
-        reservationsContainer.appendChild(labButtons);
-    
-        // Make the reservations container visible
         reservationsContainer.style.display = "block";
     }
-
     
     
     const dateElements = document.querySelectorAll(".days li:not(.inactive)");
-    dateElements.forEach(element => {
+        dateElements.forEach(element => {
         element.addEventListener("click", () => {
             const selectedDate = new Date(currYear, currMonth, parseInt(element.textContent));
-            handleDateClick(element, selectedDate);
+            const selectedLab = document.getElementById("labSelect").value;
+            handleDateClick(element, selectedDate, selectedLab);
         });
     });
+
 }
 
 renderCalendar();
