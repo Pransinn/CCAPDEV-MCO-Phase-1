@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservations</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <script src="sampledata.js"></script>
     <style>
         body {
             font-family: 'Cormorant Garamond', serif;
@@ -17,25 +18,85 @@
             min-height: 100vh;
         }
         .title {
+            font-family:'Courier', monospace;
             font-size: 50px;
-            margin: 20px 0; 
+            margin-top: 20px;
+            font-weight: 300;
         }
+
+        .settings-button {
+            font-family: 'Cormorant Garamond', serif ;
+            background-color: #f1ebe5;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            border: 1px solid #423f32;
+            width: 10%;
+            height: 7%;
+            margin-right: 30px;
+            border-radius: 20px; 
+            font-size: 18px; 
+            font-weight: bolder;
+            
+  }
+
+  .settings-button:hover {
+    background-color: #e6e0db;
+  }
+
+    .dropdown-content {
+    display:none;
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    margin-right: 30px;
+    width: 10%;
+    background-color: #f1ebe5;
+    border-radius: 20px;
+    border: 1px solid #423f32;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    font-weight: 600;
+  }
+  .dropdown-content a {
+    color: #423f32;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+   
+    margin: 5px;
+    border-radius: 20px;
+    background-color: transparent;
+    text-align: center;
+  }
+  .dropdown-content a:hover {
+    background-color: #575757;
+    color: #f1ebe5;
+  }
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
         table {
             border-collapse: collapse;
             width: 80%;
             margin-top: 20px;
-            background-color: #fff;
+            background-color: #fffaf6;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-weight:500;
         }
         th, td {
             padding: 12px 20px; 
             text-align: center;
+            
         }
         th {
-            background-color: #9C9A8B; 
+            background-color: #8d8b7e; 
             color: #423F32;
             font-size: 18px; 
+            font-weight: bold;
         }
         td {
             border-top: 1px solid #000000;
@@ -53,56 +114,98 @@
         }
         
         .back-button {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            background-color: #423F32;
-            color: white;
-            text-decoration: none;
-            font-size: 16px; 
-            transition: background-color 0.3s;
-            cursor: pointer;
-        }
+            font-family: 'Cormorant Garamond', serif;
+    background-color: #676767;
+    border: 1px solid #423f32;
+    color: #fff;
+    border: none;
+    width: 8%;
+    padding: 7px 25px;
+    border-radius: 20px;
+    font-size: 20px;
+    position: absolute;
+    top: 60px;
+    left: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
 
-        .back-button:hover {
-            background-color: #6b695c;
-        }
+  .back-button:hover {
+    background-color: #575757;
+  }
+        
         .edit-link {
             text-decoration: underline; 
         }
     </style>
 </head>
 <body>
+
+    <script>
+        // Function to populate reservations
+        function populateReservations() {
+            const reservationsTableBody = document.querySelector('table tbody');
+            sampleData.forEach(data => {
+                data.reservations.forEach(time => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${data.date}</td> 
+                        <td>${data.lab}</td>
+                        <td>${time}</td>
+                        <td><a href="#" class="edit-link" onclick="editReservation('${data.lab}', '${data.date}', '${time}')">Edit</a></td>
+                    `;
+                    reservationsTableBody.appendChild(tr);
+                });
+            });
+        }
+        window.onload = populateReservations;
+        </script>        
     <h1 class="title">Reservations</h1>
+
+    
     <table>
         <thead>
             <tr>
+                <th>Date</th>
                 <th>Lab Name</th>
                 <th>Time Slot</th>
                 <th></th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
-                <td>Lab A</td>
-                <td>February 13,2024: 08:00-09:00</td>
-                <td><a href="#" class="edit-link">Edit</a></td>
-            </tr>
-            <tr>
-                <td>Lab B</td>
-                <td>February 16,2024: 09:00-10:00</td>
-                <td><a href="#" class="edit-link">Edit</a></td>
-            </tr>
-            <tr>
-                <td>Lab C</td>
-                <td>February 21,2024: 10:00-11:00</td>
-                <td><a href="#" class="edit-link">Edit</a></td>
-            </tr>
+        
+        <tbody id="reservations-body"></tbodyid>
+            
         </tbody>
     </table>
-    <a href="#" class="back-button">Back</a>
+    
+    <button class="back-button" onclick="window.location='general.html'">Back</button>
+
+    <div class="dropdown">
+        <button class="settings-button button">Settings</button>
+        <div class="dropdown-content" style="display: none;">
+          <a href="profile.html">View profile</a>
+          <a href="login.html">Log out</a>
+        </div>
+      </div>
+
+      <script>
+       
+        const settingsButton = document.querySelector('.settings-button');
+        const dropdownContent = document.querySelector('.dropdown-content');
+      
+        
+        settingsButton.addEventListener('click', function() {
+          const isDisplayed = dropdownContent.style.display === 'block';
+          dropdownContent.style.display = isDisplayed ? 'none' : 'block';
+        });
+      
+       
+        window.addEventListener('click', function(event) {
+          if (!settingsButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+            dropdownContent.style.display = 'none';
+          }
+        });
+      </script>
+    
 </body>
 </html>
