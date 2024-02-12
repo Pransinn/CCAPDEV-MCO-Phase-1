@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DLSU Lab Room Register</title>
+<title>Register</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
@@ -45,6 +45,9 @@
     box-sizing: border-box;
   }
   .register-button, .back-button {
+    font-family: 'Cormorant Garamond', serif;
+   background-color: #cdcfc0;
+    border: 1px solid #423f32;
     display: block;
     padding: 10px;
     border: 1px solid #423f32;
@@ -54,11 +57,13 @@
     cursor: pointer;
   }
   .register-button {
+    font-family: 'Cormorant Garamond', serif;
     background-color: #cdcfc0;
-    color: #1F2937;
+    border: 1px solid #423f32;
     width: 25%;
     margin-left: 450px;
-    
+    transition: background-color 0.3s, border-color 0.3s;
+
   }
 
   .register-button:hover {
@@ -89,7 +94,7 @@
   }
   .icon-text {
     width: 300px;
-    height: 200px;
+    height: 180px;
     font-size: 24px;
     font-weight: 600;
     color: #1F2937;
@@ -106,18 +111,21 @@
   <div class="container">
     <div class="left-panel">
       <div class="register-title">Register</div>
-      <input type="text" placeholder="First name" class="input-field">
-      <input type="text" placeholder="Last name" class="input-field">
+      <form id="registrationForm">
+        <input type="text" placeholder="First name" class="input-field" id="firstName" required>
+        <input type="text" placeholder="Last name" class="input-field" id="lastName" required>
       <div class="flex items-center">
-        <input type="text" placeholder="Username" class="input-field">
+        <input type="text" placeholder="Username" class="input-field" id="username" pattern="\d{8}" title="Username should be 8 digits" required>
+
         <div class="bullet-text">• Use your ID number as username</div>
       </div>
       <div class="flex items-center">
-        <input type="password" placeholder="Password" class="input-field">
+        <input type="password" placeholder="Password" class="input-field" id="password" required>
         <div class="bullet-text">• Must be more than 8 characters</div>
       </div>
-      <input type="password" placeholder="Confirm password" class="input-field">
-      <button class="register-button">Sign up</button>
+      <input type="password" placeholder="Confirm password" class="input-field" id="confirmPassword" required>
+      <button type="submit" class="register-button">Sign up</button>
+    </form>
       <button class="back-button" onclick="window.location='index.html'">Back</button>
     </div>
     <div class="right-panel">
@@ -125,5 +133,32 @@
       <img src="dlsu lab reservation title.png" alt="DLSU Lab Room Reservation" class="icon-text">
     </div>
   </div>
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      var username = document.getElementById('username').value;
+      if (!/^\d{8}$/.test(username)) {
+      alert('Username must be an 8 digit number.');
+      return;
+}
+      var password = document.getElementById('password').value;
+      var confirmPassword = document.getElementById('confirmPassword').value;
+      if (password !== confirmPassword) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      
+      localStorage.setItem('firstName', document.getElementById('firstName').value);
+      localStorage.setItem('lastName', document.getElementById('lastName').value);
+      localStorage.setItem('username', document.getElementById('username').value);
+      
+      localStorage.setItem('password', document.getElementById('password').value);
+
+      
+      window.location.href = 'general.html';
+    });
+  </script>
 </body>
 </html>
