@@ -6,10 +6,11 @@
 <title>Reserve Room - DLSU Lab Room Reservation</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+<link rel="stylesheet" href="slotavailability.css">
 <style>
   body {
     font-family: 'Cormorant Garamond', serif;
-    background-image: url('login bg.png'); /* Replace with your actual background image URL */
+    background-image: url('login bg.png'); 
     background-size: cover;
     margin: 0;
   }
@@ -32,7 +33,7 @@
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    width: 300px; /* Adjust width as needed to match the design */
+    width: 300px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
@@ -53,7 +54,7 @@
     display:none;
     position: absolute;
     right: 20px;
-    top: 80px;
+    top: 70px;
     margin-right: 30px;
     width: 10%;
     background-color: #f1ebe5;
@@ -95,7 +96,7 @@
     color: #fff;
     border: none;
     width: 10%;
-    padding: 10px 25px;
+    padding: 7px 25px;
     border-radius: 20px;
     font-size: 20px;
     position: absolute;
@@ -113,8 +114,9 @@
 </head>
 <body>
   <div class="reserve-container">
-    <button class="button">Reserve</button>
-    <button class="button">Reserve for a student</button>
+    <button class="button" id="reserveButton">Reserve</button>
+    <button class="button" id="reserveForStudentButton">Reserve for a student</button>
+
   </div>
 
   <div class="dropdown">
@@ -123,6 +125,38 @@
       <a href="profile.html">View profile</a>
       <a href="login.html">Log out</a>
     </div>
+    <script>
+       
+        const settingsButton = document.querySelector('.settings-button');
+        const dropdownContent = document.querySelector('.dropdown-content');
+      
+        
+        settingsButton.addEventListener('click', function() {
+          const isDisplayed = dropdownContent.style.display === 'block';
+          dropdownContent.style.display = isDisplayed ? 'none' : 'block';
+        });
+      
+      
+        window.addEventListener('click', function(event) {
+          if (!settingsButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+            dropdownContent.style.display = 'none';
+          }
+        });
+      </script>
+
+    <script>
+        document.getElementById('reserveButton').addEventListener('click', function() {
+          
+          sessionStorage.setItem('reservationType', 'self');
+          window.location.href = 'confirm-reservation.html'; 
+        });
+    
+        document.getElementById('reserveForStudentButton').addEventListener('click', function() {
+          
+          sessionStorage.setItem('reservationType', 'student');
+          window.location.href = 'reserve student.html'; 
+        });
+    </script>
 </body>
   </div>
   <button class="back-button" onclick="window.location='general.html'">Back</button>
