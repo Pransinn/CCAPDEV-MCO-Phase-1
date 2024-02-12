@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DLSU Lab Room Login</title>
+<title>Login</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
   @import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond');
@@ -96,8 +96,8 @@
   }
 
   .icon-text {
-      background: url('login icon text.png') no-repeat center center;
-      width: 300px; 
+      background: url('login title.png') no-repeat center center;
+      width: 100%; 
       height: 100px; 
       text-indent: -9999px;
       margin-bottom: 2rem; 
@@ -109,27 +109,58 @@
     <div class="login-container">
         <div class="login-box">
           <div class="icon-text">DLSU LAB ROOM RESERVATION</div>
-      <input type="text" placeholder="username (ID number)" class="login-input">
-      <div style="position: relative;">
-        <input type="password" placeholder="password" class="login-input" id="password">
-      <button class="toggle-password" onclick="togglePasswordVisibility()">Show</button>
-      <button class="login-button">Login</button>
+          <form id="loginForm">
+            <input type="text" placeholder="username (ID number)" class="login-input" id="loginUsername">
+            <div style="position: relative;">
+                <input type="password" placeholder="password" class="login-input" id="loginPassword">
+                <button type="button" class="toggle-password" id="togglePassword">Show</button>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+          </form>
+        </div>
     </div>
-  </div>
+  
   <script>
-    function togglePasswordVisibility() {
-      var passwordInput = document.getElementById("password");
-      var toggleButton = passwordInput.nextElementSibling;
-      
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        toggleButton.textContent = "Hide";
-      } else {
-        passwordInput.type = "password";
-        toggleButton.textContent = "Show";
-      }
-    }
+    document.addEventListener('DOMContentLoaded', (event) => {
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        var passwordInput = document.getElementById('loginPassword');
+        var toggleButton = document.getElementById('togglePassword');
+        
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "Hide"; 
+        } else {
+            passwordInput.type = "password";
+            toggleButton.textContent = "Show"; 
+        }
+    });
+
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        var username = document.getElementById('loginUsername').value;
+        var password = document.getElementById('loginPassword').value;
+
+        if(!username || !password){
+          alert('Please enter both username and password.');
+          return;
+        }
+        
+        var storedUsername = localStorage.getItem('username');
+        var storedPassword = localStorage.getItem('password');
+        
+        if(username === storedUsername && password === storedPassword) {
+            alert('Login Successful');
+            window.location.href = 'general.html'; 
+        } else {
+            alert('Invalid username or password');
+        }
+    });
+});
+
     </script>
-  <button class="back-button" onclick="window.location='index.html'">Back</button>
+    
+    <button class="back-button" onclick="window.location='index.html'">Back</button>
+
 </body>
 </html>
