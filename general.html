@@ -96,8 +96,8 @@
 <body>
   <div class="container">
     <button class="button" onclick="location.href='reserve.html'">Reserve</button>
-    <button class="button" onclick="location.href='edit-reservation.html'">Edit reservation</button>
-    <button class="button" onclick="location.href='see-reservations.html'">See reservations</button>
+    <button class="button" onclick="location.href='edit.html'">Edit reservation</button>
+    <button class="button" onclick="location.href='seereservation.html'">See reservations</button>
   </div>
   <div class="dropdown">
     <button class="settings-button button">Settings</button>
@@ -106,6 +106,24 @@
       <a href="login.html">Log out</a>
     </div>
   </div>
+  <script>
+    // Get the settings button and the dropdown content
+    const settingsButton = document.querySelector('.settings-button');
+    const dropdownContent = document.querySelector('.dropdown-content');
+  
+    // Toggle the dropdown display on click
+    settingsButton.addEventListener('click', function() {
+      const isDisplayed = dropdownContent.style.display === 'block';
+      dropdownContent.style.display = isDisplayed ? 'none' : 'block';
+    });
+  
+    // Close the dropdown when clicking outside of it
+    window.addEventListener('click', function(event) {
+      if (!settingsButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+        dropdownContent.style.display = 'none';
+      }
+    });
+  </script>
 
   
 </body>
