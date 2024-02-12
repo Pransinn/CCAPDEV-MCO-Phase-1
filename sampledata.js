@@ -3,12 +3,12 @@ const sampleData = [
     {
       lab: "Lab A",
       date: "2024-02-01",
-      reservations: ["8:00 AM", "9:00 AM", "10:00 AM"]
+      reservations: ["08:00 AM", "09:00 AM", "10:00 AM"]
     },
     {
       lab: "Lab B",
       date: "2024-02-01",
-      reservations: ["9:00 AM", "10:00 AM", "11:00 AM"]
+      reservations: ["09:00 AM", "10:00 AM", "11:00 AM"]
     },
     {
       lab: "Lab C",
@@ -20,12 +20,12 @@ const sampleData = [
     {
       lab: "Lab A",
       date: "2024-02-02",
-      reservations: ["8:00 AM", "9:00 AM", "10:00 AM"]
+      reservations: ["08:00 AM", "09:00 AM", "10:00 AM"]
     },
     {
       lab: "Lab B",
       date: "2024-02-02",
-      reservations: ["9:00 AM", "10:00 AM", "11:00 AM"]
+      reservations: ["09:00 AM", "10:00 AM", "11:00 AM"]
     },
     {
       lab: "Lab C",
@@ -37,12 +37,12 @@ const sampleData = [
     {
       lab: "Lab A",
       date: "2024-02-03",
-      reservations: ["8:00 AM", "9:00 AM", "10:00 AM"]
+      reservations: ["08:00 AM", "09:00 AM", "10:00 AM"]
     },
     {
       lab: "Lab B",
       date: "2024-02-03",
-      reservations: ["9:00 AM", "10:00 AM", "11:00 AM"]
+      reservations: ["09:00 AM", "10:00 AM", "11:00 AM"]
     },
     {
       lab: "Lab C",
@@ -54,12 +54,12 @@ const sampleData = [
     {
       lab: "Lab A",
       date: "2024-02-04",
-      reservations: ["8:00 AM", "9:00 AM", "10:00 AM"]
+      reservations: ["08:00 AM", "09:00 AM", "10:00 AM"]
     },
     {
       lab: "Lab B",
       date: "2024-02-04",
-      reservations: ["9:00 AM", "10:00 AM", "11:00 AM"]
+      reservations: ["09:00 AM", "10:00 AM", "11:00 AM"]
     },
     {
       lab: "Lab C",
@@ -71,12 +71,12 @@ const sampleData = [
     {
       lab: "Lab A",
       date: "2024-02-05",
-      reservations: ["8:00 AM", "9:00 AM", "10:00 AM"]
+      reservations: ["08:00 AM", "09:00 AM", "10:00 AM"]
     },
     {
       lab: "Lab B",
       date: "2024-02-05",
-      reservations: ["9:00 AM", "10:00 AM", "11:00 AM"]
+      reservations: ["09:00 AM", "10:00 AM", "11:00 AM"]
     },
     {
       lab: "Lab C",
