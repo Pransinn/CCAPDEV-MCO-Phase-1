@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Profile - DLSU Lab Room Reservation</title>
+<link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond" rel="stylesheet">
+<style>
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background-image: url('profile bg.png'); 
+    background-color: #cdcfc0; 
+    background-size:cover;
+    margin: 0;
+    padding: 2rem;
+  }
+
+  .profile-container {
+    width: 90%;
+    max-width: 800px;
+    margin-top: 150px;
+    margin-left: 100px;
+    
+    padding: 4rem;
+    border-radius: 12px;
+    
+    position: relative;
+  }
+
+  .profile-title {
+    font-family: 'Courier', monospace;
+    font-size: 50px; 
+    margin-top: 1px; 
+    font-weight: bold;
+  }
+
+  .profile-details {
+    font-family: 'Courier', monospace;
+    font-size: 18px; 
+    margin-bottom: 10px; 
+    margin-top: 30px;
+  }
+
+  .edit-profile-button {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #cdcfc0;
+    border: 1px solid #423f32;
+    padding: 5px 10px;
+    margin-bottom: 1rem;
+    margin-left: 900px;
+    width: 20%;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+
+  .edit-profile-button:hover,
+  .edit-profile-button:active {
+    background-color: #B5B6AC;
+    border-color: #423f32;
+  }
+
+  .back-button {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #676767;
+    border: 1px solid #423f32;
+    color: #fff;
+    border: none;
+    width: 10%;
+    padding: 7px 25px;
+    border-radius: 20px;
+    font-size: 20px;
+    position: absolute;
+    bottom: 20px;
+    left: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .back-button:hover {
+    background-color: #575757;
+  }
+</style>
+</head>
+<body>
+
+<div class="profile-container">
+  <h1 class="profile-title">View Profile</h1>
+  <div class="profile-details">
+    <strong>First name:</strong> <span id="firstName">Vince</span>
+  </div>
+  <div class="profile-details">
+    <strong>Last name:</strong> <span id="lastName">Alejandrino</span>
+  </div>
+  <div class="profile-details">
+    <strong>Username:</strong> <span id="username">12234567</span>
+  </div>
+  <div class="profile-details">
+    <strong>Password:</strong> <span id="password">************</span>
+  </div>
+  <button class="edit-profile-button"onclick="window.location='editprofile.html'">edit profile</button>
+  <button class="back-button" onclick="window.location='general.html'">Back</button>
+</div>
+<script>
+    window.onload = function() {
+     
+      document.getElementById('firstName').textContent = localStorage.getItem('firstName');
+      document.getElementById('lastName').textContent = localStorage.getItem('lastName');
+      document.getElementById('username').textContent = localStorage.getItem('username');
+      
+      document.getElementById('password').textContent = '************';
+    };
+  </script>
+</body>
+</html>
