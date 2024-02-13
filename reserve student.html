@@ -105,19 +105,36 @@
 </head>
 <body>
 
-<div class="registration-student">
-    <h2>Reserve for a Student</h2>
-
-    <form action="registration_process.php" method="post">
-        <label for="fname">First Name:</label>
-        <input type="text" id="fname" name="firstname" required>
-
-        <label for="lname">Last Name:</label>
-        <input type="text" id="lname" name="lastname" required>
-
-        <input type="submit" class="confirm-button" value="Confirm">
-    </form>
-</div>
-<button class="back-button" onclick="window.location='reserve.html'">Back</button>
-</body>
+    <div class="registration-student">
+        <h2>Reserve for a Student</h2>
+    
+        <form id="registrationForm" onsubmit="return validateForm()">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="firstname" required>
+    
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lastname" required>
+    
+            <input type="submit" class="confirm-button" value="Confirm"> 
+        </form>
+    </div>
+    <button class="back-button" onclick="window.location='reserve.html'">Back</button>
+    
+    <script>
+        function validateForm() {
+            const firstName = document.getElementById('fname').value.trim();
+            const lastName = document.getElementById('lname').value.trim();
+            
+            if (firstName === '' || lastName === '') {
+                alert('Please enter both first name and last name.');
+                return false; 
+            } else {
+                // Redirect to confirm-reservation.html
+                window.location.href = 'confirm-reservation.html';
+                return false; 
+            }
+        }
+    </script>
+    
+    </body>
 </html>
