@@ -17,15 +17,12 @@
   }
 
   .profile-container {
+    position: relative;
     width: 90%;
     max-width: 800px;
-    margin-top: 150px;
-    margin-left: 100px;
-    
+    margin: 150px auto 0 auto;
     padding: 4rem;
     border-radius: 12px;
-    
-    position: relative;
   }
 
   .profile-title {
@@ -83,6 +80,7 @@
     background-color: #B5B6AC;
     border-color: #423f32;
   }
+
   .back-button {
     font-family: 'Cormorant Garamond', serif;
     background-color: #676767;
@@ -102,6 +100,22 @@
 
   .back-button:hover {
     background-color: #575757;
+  }
+
+  .delete-link {
+    font-family: 'Cormorant Garamond', serif;
+    color: #000000;
+    text-decoration: underline;
+    font-size: 14px; 
+    position: absolute;
+    top: 20px; 
+    right: 20px; 
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .delete-link:hover {
+    color: #685f5f;
   }
 
 </style>
@@ -125,11 +139,20 @@
       <button type="submit" class="edit-profile-button">Confirm</button>
     </form>
     <button class="back-button" onclick="window.location='profile.html'">Back</button>
+    <span class="delete-link" onclick="deleteAccount()">Delete Account?</span>
   </div>
 
   <script>
     function changePassword() {
       window.location.href = 'changePassword.html';
+    }
+
+    function deleteAccount() {
+      if (confirm('Are you sure you want to delete your account?')) {
+        
+        alert('Account deleted successfully!');
+        window.location.href = 'deleteAccount.html';
+      }
     }
 
     window.onload = function() {
