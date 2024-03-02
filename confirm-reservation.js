@@ -52,10 +52,6 @@ const renderCalendar = () => {
         return reservations.length > 0 ? reservations[0].reservations : [];
     };
     
-    
-    
-    
-    
     const handleDateClick = (element, date, selectedLab) => {
         const reservationsContainer = document.querySelector(".reservations-container");
         reservationsContainer.innerHTML = "";
@@ -98,19 +94,29 @@ const renderCalendar = () => {
     
         reservationsContainer.appendChild(slotButtonsContainer);
         reservationsContainer.style.display = "block";
-    }
-    
+    };
     
     const dateElements = document.querySelectorAll(".days li:not(.inactive)");
-        dateElements.forEach(element => {
-        element.addEventListener("click", () => {
-            const selectedDate = new Date(currYear, currMonth, parseInt(element.textContent));
-            const selectedLab = document.getElementById("labSelect").value;
-            handleDateClick(element, selectedDate, selectedLab);
-        });
+    dateElements.forEach(element => {
+        const day = parseInt(element.textContent);
+        const month = parseInt(element.dataset.month);
+        const year = parseInt(element.dataset.year);
+        const elementDate = new Date(year, month, day);
+        const today = new Date(currYear, currMonth, date.getDate());
+
+        if (elementDate < today) {
+            element.classList.add("inactive");
+            element.removeEventListener("click", handleDateClick);
+        } else {
+            element.addEventListener("click", () => {
+                const selectedDate = new Date(currYear, currMonth, parseInt(element.textContent));
+                const selectedLab = document.getElementById("labSelect").value;
+                handleDateClick(element, selectedDate, selectedLab);
+            });
+        }
     });
 
-}
+};
 
 renderCalendar();
 
