@@ -51,11 +51,7 @@ const renderCalendar = () => {
     
         return reservations.length > 0 ? reservations[0].reservations : [];
     };
-    
-    
-    
-    
-    
+
     const handleDateClick = (element, date, selectedLab) => {
         const reservationsContainer = document.querySelector(".reservations-container");
         reservationsContainer.innerHTML = "";
@@ -64,7 +60,6 @@ const renderCalendar = () => {
         header.textContent = `Available time slots for ${selectedLab} on ${months[date.getMonth()]} ${date.getDate()}, ${date.getFullYear()}:`;
         reservationsContainer.appendChild(header);
     
-        
         const labReservations = getReservationsForDate(date, selectedLab);
     
         const ul = document.createElement("ul");
@@ -79,19 +74,30 @@ const renderCalendar = () => {
         reservationsContainer.appendChild(ul);
     
         reservationsContainer.style.display = "block";
-    }
-    
-    
-    const dateElements = document.querySelectorAll(".days li:not(.inactive)");
-        dateElements.forEach(element => {
-        element.addEventListener("click", () => {
-            const selectedDate = new Date(currYear, currMonth, parseInt(element.textContent));
-            const selectedLab = document.getElementById("labSelect").value;
-            handleDateClick(element, selectedDate, selectedLab);
-        });
-    });
+    };
 
-}
+    const dateElements = document.querySelectorAll(".days li:not(.inactive)");
+    dateElements.forEach(element => {
+        const day = parseInt(element.textContent);
+        const month = parseInt(element.dataset.month);
+        const year = parseInt(element.dataset.year);
+        const elementDate = new Date(year, month, day);
+
+        // Check if the date is in the past
+        if (elementDate <= new Date(currYear, currMonth, 1)) {
+            // If it's in the past, remove the event listener
+            element.classList.add("inactive");
+            element.removeEventListener("click", handleDateClick);
+        } else {
+            // If it's a future date, add the event listener
+            element.classList.remove("inactive");
+            element.addEventListener("click", () => {
+                const selectedLab = document.getElementById("labSelect").value;
+                handleDateClick(element, elementDate, selectedLab);
+            });
+        }
+    });
+};
 
 renderCalendar();
 
