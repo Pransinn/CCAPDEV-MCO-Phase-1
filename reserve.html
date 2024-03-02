@@ -115,7 +115,7 @@
 <body>
   <div class="reserve-container">
     <button class="button" id="reserveButton">Reserve</button>
-    <button class="button" id="reserveForStudentButton">Reserve for a student</button>
+    <button class="button" id="reserveLabButton">Reserve Lab</button>
 
   </div>
 
@@ -151,7 +151,7 @@
           window.location.href = 'confirm-reservation.html'; 
         });
     
-        document.getElementById('reserveForStudentButton').addEventListener('click', function() {
+        document.getElementById('reserveLabButton').addEventListener('click', function() {
           
           sessionStorage.setItem('reservationType', 'student');
           window.location.href = 'reserve student.html'; 
